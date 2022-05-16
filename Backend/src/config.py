@@ -12,6 +12,7 @@ class Config:
 
     SECRET_KEY = getenv("SECRET_KEY") or "secret-key"
     DEBUG = False
+    HOST = getenv("HOST") or "24"
     ENV = getenv("FLASK_ENV") or "dev"
     VERSION = getenv("VERSION") or "1"
     API_URL = getenv("API_URL") or f"/api/v{VERSION}/"

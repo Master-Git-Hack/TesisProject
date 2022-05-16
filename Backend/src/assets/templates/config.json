@@ -1,0 +1,7 @@
+{
+    "initialConfig":1,
+    "host": "192.168.100.0/24",
+    "ipAddrs": [],
+    "btAddrs": [],
+    "bleAddrs":[]
+}

@@ -12,3 +12,4 @@ TEMPORARY_PATH="tmp"
 DATABASE_URL_DEV="sqlite:///db.sqlite"
 DATABASE_URL_TEST="sqlite:///db.sqlite"
 DATABASE_URL="sqlite:///db.sqlite"
+HOST=24
