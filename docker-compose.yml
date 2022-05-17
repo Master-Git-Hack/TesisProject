@@ -1,0 +1,33 @@
+version: '3.8'
+#name: cadastral.app.container.docker
+services:
+  frontend:
+    container_name: tesis.react.container.docker
+    build:
+      context: ./Frontend/
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - ./Frontend:/usr/src/Frontend
+    ports:
+      - 80:80
+    networks:
+      - tesis_network
+
+  backend:
+    container_name: tesis.flask.container.docker
+    build: 
+      context: ./Backend/
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - ./Backend:/usr/src/Backend
+    ports:
+      - 5000:5000
+
+    networks:
+      - tesis_network
+#[optional] If the network is not created, docker will create by itself.
+networks:
+  tesis_network: {}
+

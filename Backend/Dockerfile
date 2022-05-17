@@ -1,7 +1,7 @@
 FROM python:3.8.2-alpine
 LABEL version="1.0.0"
 LABEL description="Backend Server's Image"
-LABEL mantenier="Einar Jhordany Serna Valdivia<e.serna.1a.43@gmail.com>"
+LABEL mantenier="Einar Jhordany Serna Valdivia<einar.serna@cimat.mx>"
 WORKDIR /usr/src/Backend
 COPY . /usr/src/Backend
 RUN apk --update add bash nano
