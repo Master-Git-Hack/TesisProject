@@ -11,9 +11,10 @@ class Network(db.Model):
     """
     Network model for storing devices
     """
+
     __tablename__ = "network"
-    id = Column(Integer,primary_key=True,autoincrement=True)
-    address = Column(String(50),unique=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    address = Column(String(50), unique=True)
     hostname = Column(JSON)
     mac = Column(JSON)
     os = Column(JSON)
@@ -22,7 +23,7 @@ class Network(db.Model):
     banned = Column(Boolean, default=False)
     date = Column(DateTime, default=datetime.utcnow)
 
-    def __init__(self,address,hostname,mac,os,ports,state,banned, date):
+    def __init__(self, address, hostname, mac, os, ports, state, banned, date):
         self.address = address
         self.hostname = hostname
         self.mac = mac

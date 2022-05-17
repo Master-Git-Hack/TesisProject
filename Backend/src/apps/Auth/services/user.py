@@ -7,6 +7,7 @@ from ..models.user import User, UserSchema, apiUserModel
 
 userModel = apiUserModel
 
+
 def saveNewUser(data: Dict) -> Tuple[Dict, int]:
     """
     This method creates a new user

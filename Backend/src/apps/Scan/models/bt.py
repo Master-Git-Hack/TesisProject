@@ -10,14 +10,16 @@ class BT(db.Model):
     """
     BT model for storing devices
     """
+
     __tablename__ = "bt"
-    id = Column(Integer,primary_key=True,autoincrement=True)
-    address = Column(String(50),unique=True)
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    address = Column(String(50), unique=True)
     name = Column(String(50))
-    types=Column(String(50))
+    types = Column(String(50))
     banned = Column(Boolean, default=False)
     date = Column(DateTime, default=datetime.utcnow)
-    def __init__(self,address,name,types,banned,date):
+
+    def __init__(self, address, name, types, banned, date):
         self.address = address
         self.name = name
         self.types = types

@@ -21,8 +21,10 @@ class Config:
     CORS_ORIGIN = getenv("CORS_ORIGIN") or "*"
     TEMPORARY_PATH = getenv("TEMPORARY_PATH") or "tmp"
 
+
 class Paths:
     """Paths configuration."""
+
     tmp = join(rootPath, Config.TEMPORARY_PATH)
 
 
@@ -68,4 +70,3 @@ configAPI = dict(
 key = Config.SECRET_KEY
 env = Config.ENV
 corsSRC = {f"{Config.API_URL}{Config.CORS}": dict(origin=Config.CORS_ORIGIN)}
-

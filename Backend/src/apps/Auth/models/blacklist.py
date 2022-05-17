@@ -39,4 +39,5 @@ class BlacklistToken(db.Model):
         else:
             return False
 
+
 db.create_all()

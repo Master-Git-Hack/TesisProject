@@ -8,12 +8,13 @@ from ..helpers.auth import Auth
 ns = Namespace("auth", description="auth related operations")
 
 model = ns.model(
-        "userAuth",
-        {
-            "email": fields.String(required=True, description="The email address"),
-            "password": fields.String(required=True, description="The user password"),
-        },
-    )
+    "userAuth",
+    {
+        "email": fields.String(required=True, description="The email address"),
+        "password": fields.String(required=True, description="The user password"),
+    },
+)
+
 
 @ns.route("/signin")
 class UserLogin(Resource):
@@ -35,6 +36,7 @@ class LogoutAPI(Resource):
     """
     Logout Resource
     """
+
     @ns.doc("logout a user")
     def post(self) -> Tuple[Dict[str, str], int]:
         # get auth token

@@ -5,35 +5,32 @@ from numpy import asarray, random, seterr
 seterr(divide="ignore", invalid="ignore")
 random.seed(42)
 
-class Population():
 
+class Population:
     def __init__(self, bag, adjacencyMat):
         self.bag = bag
         self.parents = []
         self.score = 0
         self.best = None
         self.adjacencyMat = adjacencyMat
-    
 
     def fitness(self, chromosome):
         return sum(
             [
                 self.adjacencyMat[value, chromosome[index + 1]]
-                for index,value in enumerate(chromosome) if len(chromosome) - 1>= index+1
+                for index, value in enumerate(chromosome)
+                if len(chromosome) - 1 >= index + 1
             ]
         )
 
     def evaluate(self):
-        distances = asarray(
-            [self.fitness(chromosome) for chromosome in self.bag]
-        )
+        distances = asarray([self.fitness(chromosome) for chromosome in self.bag])
         self.score = np.min(distances)
         self.best = self.bag[distances.tolist().index(self.score)]
         self.parents.append(self.best)
         if False in (distances[0] == distances):
             distances = np.max(distances) - distances
         return distances / np.sum(distances)
-
 
     def select(self, k=22):
         fit = self.evaluate()
@@ -48,13 +45,9 @@ class Population():
         count, size = self.parents.shape
         for _ in range(len(self.bag)):
             if random.rand() > pCross:
-                children.append(
-                    list(self.parents[random.randint(count, size=1)[0]])
-                )
+                children.append(list(self.parents[random.randint(count, size=1)[0]]))
             else:
-                parent1, parent2 = self.parents[
-                    random.randint(count, size=2), :
-                ]
+                parent1, parent2 = self.parents[random.randint(count, size=2), :]
                 idx = random.choice(range(size), size=2, replace=False)
                 start, end = min(idx), max(idx)
                 child = [None] * size
@@ -68,7 +61,7 @@ class Population():
                         child[i] = parent2[pointer]
                 children.append(child)
         return children
-    
+
     def mutate(self, pCross=0.5, pMut=0.1):
         next_bag = []
         children = self.crossover(pCross)
@@ -81,14 +74,14 @@ class Population():
 
 
 def swap(chromosome):
-    a,b = random.choice(len(chromosome,2))
-    chromosome[a],chromosome[b] = (chromosome[b],chromosome[a])
+    a, b = random.choice(len(chromosome, 2))
+    chromosome[a], chromosome[b] = (chromosome[b], chromosome[a])
     return chromosome
+
 
 def run(cities, adjacencyMat, nPopulation):
     pop = Population(
-        asarray([random.permutation(cities) for _ in range(nPopulation)]), 
-        adjacencyMat
+        asarray([random.permutation(cities) for _ in range(nPopulation)]), adjacencyMat
     )
     pop.evaluate()
     pop.select()

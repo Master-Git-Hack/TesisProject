@@ -75,14 +75,16 @@ class User(db.Model):
 
 db.create_all()
 
+
 class UserSchema(ma.Schema):
     class Meta:
         model = User
         fields = ("id", "email", "registeredOn", "admin", "publicId", "username")
 
+
 apiUserModel = dict(
-    email = fields.String(required=True, description="User Email Address"),
-    username = fields.String(required=True, description="User Username"),
-    password = fields.String(required=True, description="User Password"),
-    publicId = fields.String(description="User Public Id"),
+    email=fields.String(required=True, description="User Email Address"),
+    username=fields.String(required=True, description="User Username"),
+    password=fields.String(required=True, description="User Password"),
+    publicId=fields.String(description="User Public Id"),
 )

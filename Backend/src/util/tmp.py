@@ -17,11 +17,13 @@ def name(
     :param extension: Extension ['pdf','html',...etc].
     :param path: root path.
     :return: Filename.
-    
+
     example: tmpFilename(suffix="_tmp", extension="pdf")
     return: "example_tmp.pdf"\n
-   
+
     """
-    with NamedTemporaryFile(suffix=suffix,prefix=prefix,dir=path, delete=True) as temp:
+    with NamedTemporaryFile(
+        suffix=suffix, prefix=prefix, dir=path, delete=True
+    ) as temp:
         return f"{temp.name}.{extension}"
     #
