@@ -16,7 +16,7 @@ RUN yarn install --inmutable && yarn build
 FROM nginx:alpine
 LABEL version="1.0.0"
 LABEL description="Cadastral Frontend Server's Image"
-LABEL mantenier="Einar Jhordany Serna Valdivia<eserna@guanajuato.gob.mx>"
+LABEL mantenier="Einar Jhordany Serna Valdivia<einar.serna@cimat.mx>"
 WORKDIR /usr/share/nginx/html
 # Remove default nginx static assets
 RUN rm -rf ./*

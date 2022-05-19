@@ -1,5 +1,5 @@
 #!/bin/bash
-app="docker.dev.react"
+app="docker.tesis.react"
 docker stop ${app}
 docker rm ${app}
 docker build -t ${app} .

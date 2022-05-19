@@ -1,5 +1,5 @@
 #!/bin/bash
-app="docker.dev.flask"
+app="docker.tesis.flask"
 docker stop ${app}
 docker rm ${app}
 docker build -t ${app} .

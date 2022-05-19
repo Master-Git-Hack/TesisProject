@@ -1,19 +1,17 @@
 version: '3.8'
 #name: cadastral.app.container.docker
 services:
-  frontend:
-    container_name: tesis.react.container.docker
-    build:
-      context: ./Frontend/
-      dockerfile: Dockerfile
-    restart: always
-    volumes:
-      - ./Frontend:/usr/src/Frontend
+  data:
+    container_name: tesis.data.container.docker
+    image: postgres:latest
+    volumes: 
+      - data:/var/lib/postgresql/data
     ports:
-      - 80:80
-    networks:
-      - tesis_network
-
+      - 5432:5432
+    environment:
+      - POSTGRES_DB=tesis
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=toor
   backend:
     container_name: tesis.flask.container.docker
     build: 
@@ -24,9 +22,34 @@ services:
       - ./Backend:/usr/src/Backend
     ports:
       - 5000:5000
-
+    environment:
+      - DB_SERVER:data
+      - POSTGRES_DB=tesis
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=toor
+    links:
+      - data
     networks:
       - tesis_network
+
+  frontend:
+    container_name: tesis.react.container.docker
+    build:
+      context: ./Frontend/
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - ./Frontend:/usr/src/Frontend
+    ports:
+      - 80:80
+    links:
+      - backend
+    networks:
+      - tesis_network
+
+volumes:
+  data:
+
 #[optional] If the network is not created, docker will create by itself.
 networks:
   tesis_network: {}
