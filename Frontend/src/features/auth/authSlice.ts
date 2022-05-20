@@ -9,37 +9,51 @@ export const slice = createSlice({
 	name: "auth",
 	initialState,
 	reducers: {
-		signIn: (state, action: PayloadAction<any>) => {
-			const { payload } = action;
-			if (payload !== undefined) {
-				const { status, Authorization, publicId, name } = payload;
+		signOut: (state) => {
+			localStorage.removeItem("Authorization");
+			localStorage.removeItem("publicId");
+			localStorage.removeItem("isAdmin");
+		},
+		setPublic: (state) => {
+			state.publicId = localStorage.getItem("publicId");
+			state.isAdmin = localStorage.getItem("isAdmin")?.includes("false") ? false : true;
+		},
+		signUp: (state) => {},
+	},
+	extraReducers(builder) {
+		builder
+			.addCase(request.post.pending, (state) => {
+				state.status = "loading";
+			})
+			.addCase(request.post.fulfilled, (state, action: PayloadAction<any>) => {
+				const { status, message, Authorization, publicId , isAdmin} = action.payload;
 				state.status = status;
 				if (status.includes("success")) {
 					localStorage.setItem("Authorization", Authorization);
-					state.publicId = publicId;
-					state.name = name;
+					localStorage.setItem("publicId", publicId);
+					localStorage.setItem("isAdmin",isAdmin);
 				}
-			}
-		},
-		signOut: (state) => {
-			localStorage.removeItem("Authorization");
-		},
-		signUp: (state) => {},
-		setStatus: (state, action: PayloadAction<any>) => {
-			const { status } = action.payload;
-			state.status = status !== undefined ? status : "unset";
-		},
-		setMessage: (state, action: PayloadAction<any>) => {
-			const { message } = action.payload;
-			state.message = message !== undefined ? message : "";
-		},
+				if (status.includes("failed")) {
+					state.message = message;
+				}
+			}).addCase(request.get.pending, (state) => {
+				state.status = "loading";
+			}).addCase(request.get.fulfilled, (state, action: PayloadAction<any>) => {
+				if (localStorage.getItem("Authorization") && localStorage.getItem("publicId")) {
+					const { username } = action.payload;
+					if (username !== undefined) { 
+						state.status = "success";
+						state.name = username;
+					}
+					else{
+						state.status = "failed";
+						localStorage.removeItem("Authorization");
+					}
+					
+				}
+			})
 	},
-	extraReducers(builder){
-		builder.add(request.post.loading,(state)=>{
-			state.status = "loading"
-		})
-	}
 });
-export const { signIn, signOut, signUp, setStatus, setMessage } = slice.actions;
+export const { signOut, signUp,setPublic } = slice.actions;
 export const getState = (state: RootState) => state.auth;
 export default slice.reducer;

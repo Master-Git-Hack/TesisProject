@@ -29,6 +29,7 @@ class UserList(Resource):
         def get(self, publicId):
             """get a user given its identifier"""
             user = getUser(publicId)
+            print(user)
             if not user:
                 ns.abort(404)
             else:

@@ -7,7 +7,7 @@ services:
     volumes: 
       - data:/var/lib/postgresql/data
     ports:
-      - 5432:5432
+      - 5432:5433
     environment:
       - POSTGRES_DB=tesis
       - POSTGRES_USER=root
@@ -21,7 +21,7 @@ services:
     volumes:
       - ./Backend:/usr/src/Backend
     ports:
-      - 5000:5000
+      - 5001:5001
     environment:
       - DB_SERVER:data
       - POSTGRES_DB=tesis
@@ -41,7 +41,7 @@ services:
     volumes:
       - ./Frontend:/usr/src/Frontend
     ports:
-      - 80:80
+      - 80:81
     links:
       - backend
     networks:

@@ -14,7 +14,6 @@ const AuthNavigation = () => (
 		<Nav />
 		<NavRoutes>
 			<Route path="/Home" element={<>Home</>} />
-			<Route path="*" element={<Navigate to="/Auth" />} />
 		</NavRoutes>
 	</>
 );

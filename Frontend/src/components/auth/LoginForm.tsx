@@ -1,28 +1,39 @@
 /** @format */
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import { auth } from "../../api/auth";
-import { request } from "../../features/auth/authSlice";
+import { getState, request } from "../../features/auth/authSlice";
 import logo from "../../assets/images/logo.png";
+import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 export const LoginForm = () => {
+	const { status, message } = useAppSelector(getState);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [showPwd, setShowPwd] = useState(false);
+	const dispatch = useAppDispatch();
 	const sendRequest = async (e: any) => {
 		e.preventDefault();
 		if (email !== "" && password !== "") {
-			const payload = new FormData();
-			payload.append("email", email);
-			payload.append("password", password);
-			const url = "auth/signin";
-		dispatch(request.post({
-				url,
-				responseType: "json",
-				payload,
-			}));
-			
+			dispatch(
+				request.post({
+					url: "auth/signin",
+					responseType: "json",
+					payload: {
+						email,
+						password,
+					},
+				}),
+			);
 		} else window.alert(`Debe llenar los campos correctamente para continuar`);
 	};
+	useEffect(() => {
+		if (status === "success") {
+			window.location.href = "/Home";
+		}
+		if (status.includes("failed")) {
+			window.alert(message);
+		}
+	}, [status]);
 	return !auth ? (
 		<div className="container container-fluid px-5 mx-auto">
 			<div className="card px-5 mt-3">

@@ -3,7 +3,7 @@ from typing import Dict, Tuple
 from flask import request
 from flask_restx import Namespace, Resource
 
-from ....util.decorator import adminTokenRequired
+from ....util.decorator import adminTokenRequired, tokenRequired
 from ..services.user import getAllUsers, getUser, saveNewUser, userModel
 
 ns = Namespace("user", description="user related operations")
@@ -44,6 +44,7 @@ class User(Resource):
 
     @ns.doc("get a user")
     @ns.marshal_with(model)
+    @tokenRequired
     def get(self, publicId: str) -> Tuple[Dict, int]:
         """
         Returns a user given its identifier

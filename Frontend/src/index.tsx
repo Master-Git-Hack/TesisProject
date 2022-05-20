@@ -15,11 +15,11 @@ const root = createRoot(container);
 
 root.render(
 	<React.StrictMode>
-		<Router>
-			<Provider store={store}>
+		<Provider store={store}>
+			<Router>
 				<Routes />
-			</Provider>
-		</Router>
+			</Router>
+		</Provider>
 	</React.StrictMode>,
 );
 

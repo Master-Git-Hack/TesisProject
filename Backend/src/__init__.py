@@ -1,17 +1,15 @@
-from os import getenv
 from unittest import TestLoader, TextTestRunner
 
 from flask import Flask
 from flask_bcrypt import Bcrypt
+from flask_cors import CORS
 from flask_marshmallow import Marshmallow
-
 # from flask_migrate import Migrate, MigrateCommand
 from flask_restx import Api
-
 # from flask_script import Manager
 from flask_sqlalchemy import SQLAlchemy
 
-from .config import configAPI, configByName, env
+from .config import configAPI, configByName, corsSRC, env
 
 db = SQLAlchemy()
 bcrypt = Bcrypt()
@@ -41,7 +39,7 @@ api = Api(
     contact="Einar Jhordany Serna Valdivia",
 )
 ma = Marshmallow(app)
-
+cors = CORS(app, resources=corsSRC)
 import src.routes
 
 

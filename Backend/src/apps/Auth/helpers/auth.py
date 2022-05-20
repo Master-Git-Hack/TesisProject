@@ -20,6 +20,8 @@ class Auth:
                         "status": "success",
                         "message": "Successfully logged in.",
                         "Authorization": authToken.decode(),
+                        "publicId": user.publicId,
+                        "isAdmin": user.admin,
                     }
                     return response, 200
             else:

@@ -1,11 +1,34 @@
 /** @format */
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.png";
-import { getState, signOut } from "../../features/auth/authSlice";
+import { getState, signOut, setPublic, request } from "../../features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 export default function Nav() {
-	const { name, isAdmin } = useAppSelector(getState);
+	const { name, isAdmin, publicId } = useAppSelector(getState);
 	const dispatch = useAppDispatch();
+	useEffect(() => {
+		dispatch(setPublic());
+	}, []);
+	useEffect(() => {
+		if (publicId.trim() !== "") {
+			dispatch(
+				request.get({
+					url: `user/${publicId}`,
+				}),
+			);
+		}
+	}, [publicId]);
+	const logout = () => {
+		dispatch(
+			request.post({
+				url: "auth/signout",
+				responseType: "json",
+				payload: {},
+			}),
+		);
+		dispatch(signOut());
+	};
 	return (
 		<nav className="navbar navbar-expand-lg navbar-light bg-light mb-4">
 			<div className="container-fluid">
@@ -23,20 +46,20 @@ export default function Nav() {
 				<div className="collapse navbar-collapse">
 					<div className="navbar-nav me-auto">
 						<Link to="/Cotizacion" className="nav-link">
-							Cotización
+							Configurar
 						</Link>
-						{isAdmin && (
+						{isAdmin ? (
 							<>
 								<Link to="/Cotizacion" className="nav-link">
-									Cotización
+									Gestionar Acceso
 								</Link>
 							</>
-						)}
+						) : null}
 					</div>
 					<div className="navbar-nav">
 						<span className="nav-link disabled">{name}</span>
-						<a className="nav-link text-danger" onClick={() => {}} href="/Auth">
-							Log Out
+						<a className="nav-link text-danger" onClick={logout} href="/Auth">
+							logout
 						</a>
 					</div>
 				</div>
