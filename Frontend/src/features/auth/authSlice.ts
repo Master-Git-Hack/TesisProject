@@ -34,6 +34,11 @@ export const slice = createSlice({
 			state.message = message !== undefined ? message : "";
 		},
 	},
+	extraReducers(builder){
+		builder.add(request.post.loading,(state)=>{
+			state.status = "loading"
+		})
+	}
 });
 export const { signIn, signOut, signUp, setStatus, setMessage } = slice.actions;
 export const getState = (state: RootState) => state.auth;

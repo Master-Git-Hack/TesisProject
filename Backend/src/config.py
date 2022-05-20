@@ -20,6 +20,8 @@ class Config:
     CORS = getenv("CORS") or "*"
     CORS_ORIGIN = getenv("CORS_ORIGIN") or "*"
     TEMPORARY_PATH = getenv("TEMPORARY_PATH") or "tmp"
+    EMAIL_USER = getenv("EMAIL_USER")
+    EMAIL_PWD = getenv("EMAIL_PWD")
 
 
 class Paths:
@@ -70,3 +72,4 @@ configAPI = dict(
 key = Config.SECRET_KEY
 env = Config.ENV
 corsSRC = {f"{Config.API_URL}{Config.CORS}": dict(origin=Config.CORS_ORIGIN)}
+emailConfig=dict(user=Config.EMAIL_USER,pwd=Config.EMAIL_PWD)

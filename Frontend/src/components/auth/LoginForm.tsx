@@ -15,6 +15,12 @@ export const LoginForm = () => {
 			payload.append("email", email);
 			payload.append("password", password);
 			const url = "auth/signin";
+		dispatch(request.post({
+				url,
+				responseType: "json",
+				payload,
+			}));
+			
 		} else window.alert(`Debe llenar los campos correctamente para continuar`);
 	};
 	return !auth ? (
