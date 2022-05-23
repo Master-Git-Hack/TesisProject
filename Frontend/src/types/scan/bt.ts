@@ -1,5 +1,7 @@
+/** @format */
+
 export interface bluetooth {
-    name: string;
-    address: string;
-    status: boolean;
+	name: string;
+	address: string;
+	status: boolean;
 }

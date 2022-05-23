@@ -25,34 +25,34 @@ export const slice = createSlice({
 				state.status = "loading";
 			})
 			.addCase(request.post.fulfilled, (state, action: PayloadAction<any>) => {
-				const { status, message, Authorization, publicId , isAdmin} = action.payload;
+				const { status, message, Authorization, publicId, isAdmin } = action.payload;
 				state.status = status;
 				if (status.includes("success")) {
 					localStorage.setItem("Authorization", Authorization);
 					localStorage.setItem("publicId", publicId);
-					localStorage.setItem("isAdmin",isAdmin);
+					localStorage.setItem("isAdmin", isAdmin);
 				}
 				if (status.includes("failed")) {
 					state.message = message;
 				}
-			}).addCase(request.get.pending, (state) => {
+			})
+			.addCase(request.get.pending, (state) => {
 				state.status = "loading";
-			}).addCase(request.get.fulfilled, (state, action: PayloadAction<any>) => {
+			})
+			.addCase(request.get.fulfilled, (state, action: PayloadAction<any>) => {
 				if (localStorage.getItem("Authorization") && localStorage.getItem("publicId")) {
 					const { username } = action.payload;
-					if (username !== undefined) { 
+					if (username !== undefined) {
 						state.status = "success";
 						state.name = username;
-					}
-					else{
+					} else {
 						state.status = "failed";
 						localStorage.removeItem("Authorization");
 					}
-					
 				}
-			})
+			});
 	},
 });
-export const { signOut, signUp,setPublic } = slice.actions;
+export const { signOut, signUp, setPublic } = slice.actions;
 export const getState = (state: RootState) => state.auth;
 export default slice.reducer;
