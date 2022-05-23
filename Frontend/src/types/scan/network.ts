@@ -5,17 +5,17 @@ interface hostname{
 interface mac{
     addr: string;
     addrtype: string;
-    vendor: string;
+    vendor?: string;
 }
 interface state{
     reason: string;
-    reason_ttl: number;
-    state: number;
+    reason_ttl: number | string;
+    state: string;
 }
 export interface network { 
     address: string;
     hostname: Array<hostname>;
-    macaddress: mac;
+    macaddress: mac | null;
     osmatch: any;
     ports: any;
     state: state;

@@ -26,7 +26,7 @@ export const Scan = () => {
 						<MinView
 							name="Bluetooth Low Energy"
 							id={0}
-							child={
+							children={
 								<Bluetooth
 									data={ble}
 									actions={() => {}}
@@ -41,7 +41,7 @@ export const Scan = () => {
 						<MinView
 							name="Bluetooth"
 							id={0}
-							child={<Bluetooth data={bt} actions={() => {}} type="Bluetooth" />}
+							children={<Bluetooth data={bt} actions={() => {}} type="Bluetooth" />}
 						/>
 					</td>
 				</tr>
@@ -50,7 +50,7 @@ export const Scan = () => {
 						<MinView
 							name="Dispositivos con Tarjeta de Red"
 							id={0}
-							child={<Network data={network} actions={() => {}} />}
+							children={<Network data={network} actions={() => {}} />}
 						/>
 					</td>
 				</tr>

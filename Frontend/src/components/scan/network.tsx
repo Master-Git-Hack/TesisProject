@@ -32,16 +32,16 @@ export const Network = (props: { data: any; actions: any }) => (
 			{props.data.map((item: any, index: number) => (
 				<tr key={`data for network ${index}`}>
 					<td>{item.address}</td>
-					<td>{item.hostname.name}</td>
-					<td>{item.hostname.type}</td>
-					<td>{item.macaddress.addr}</td>
-					<td>{item.macaddress.addrtype}</td>
-					<td>{item.macaddress.vendor}</td>
-					<td>{item.osmatch}</td>
-					<td>{item.ports}</td>
-					<td>{item.state.reason}</td>
-					<td>{item.state.reason_ttl}</td>
-					<td>{item.state.reason_state}</td>
+					<td>{item.hostname.length > 0 ? item.hostname[0].name : null}</td>
+					<td>{item.hostname.length > 0 ? item.hostname[0].type : null}</td>
+					<td>{item.macaddress?.addr || null}</td>
+					<td>{item.macaddress?.addrtype || null}</td>
+					<td>{item.macaddress?.vendor || null}</td>
+					<td>{/*item.osmatch || null*/}</td>
+					<td>{/*item.ports || null*/}</td>
+					<td>{item.state?.reason || null}</td>
+					<td>{item.state?.reason_ttl || null}</td>
+					<td>{item.state?.reason_state || null}</td>
 					<td>
 						<div className="form-check form-switch">
 							<input

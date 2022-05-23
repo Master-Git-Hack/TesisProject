@@ -1,7 +1,7 @@
 /** @format */
 
 import { useState } from "react";
-export const MinView = (props: { child: any; name: string; id: number }) => {
+export const MinView = (props: { children: any; name: string; id: number }) => {
 	const [show, setShow] = useState(true);
 	return (
 		<div className="border">
@@ -19,7 +19,7 @@ export const MinView = (props: { child: any; name: string; id: number }) => {
 			<div className="row">
 				<div className="col-12">
 					{show ? (
-						props.child
+						props.children
 					) : (
 						<h6 className="text-center badge rounded-pill bg-info">
 							Documento: {props.id} - {props.name}
