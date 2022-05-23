@@ -45,13 +45,16 @@ export default function Nav() {
 
 				<div className="collapse navbar-collapse">
 					<div className="navbar-nav me-auto">
-						<Link to="/Cotizacion" className="nav-link">
-							Configurar
+						<Link to="/Report" className="nav-link">
+							Reportes
 						</Link>
-						{isAdmin ? (
+						{!isAdmin ? (
 							<>
-								<Link to="/Cotizacion" className="nav-link">
+								<Link to="/SignUp" className="nav-link">
 									Gestionar Acceso
+								</Link>
+								<Link to="/Scan" className="nav-link">
+									Escanear
 								</Link>
 							</>
 						) : null}

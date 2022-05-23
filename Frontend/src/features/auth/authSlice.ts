@@ -3,7 +3,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../app/store";
 import { initialState } from "../../types/auth/authStorage";
 import { consume } from "../../api/consume";
-import { logOut } from "../../api/auth";
 export const request = consume("auth");
 export const slice = createSlice({
 	name: "auth",

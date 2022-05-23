@@ -1,5 +1,4 @@
 version: '3.8'
-#name: cadastral.app.container.docker
 services:
   data:
     container_name: tesis.data.container.docker
