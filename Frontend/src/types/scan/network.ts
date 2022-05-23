@@ -19,6 +19,7 @@ export interface network {
 	hostname: Array<hostname>;
 	macaddress: mac | null;
 	osmatch: any;
+	date: string;
 	ports: any;
 	state: state;
 	status: boolean;

@@ -1,7 +1,7 @@
 from socket import AF_INET, SOCK_DGRAM, socket
 
 
-def getIp():
+def getHost():
     """function to get the ip address of the device
 
     Returns:

@@ -11,7 +11,6 @@ class Config:
     """Base configuration."""
 
     SECRET_KEY = getenv("SECRET_KEY") or "secret-key"
-    DEBUG = False
     HOST = getenv("HOST") or "24"
     ENV = getenv("FLASK_ENV") or "dev"
     VERSION = getenv("VERSION") or "1"
@@ -72,4 +71,4 @@ configAPI = dict(
 key = Config.SECRET_KEY
 env = Config.ENV
 corsSRC = {f"{Config.API_URL}{Config.CORS}": dict(origin=Config.CORS_ORIGIN)}
-emailConfig=dict(user=Config.EMAIL_USER,pwd=Config.EMAIL_PWD)
+emailConfig = dict(user=Config.EMAIL_USER, pwd=Config.EMAIL_PWD)

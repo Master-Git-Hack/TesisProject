@@ -13,9 +13,8 @@ export const consume = (component: string) => ({
 	get: createAsyncThunk(`${component}/get`, async (action: any) => {
 		const { url } = action;
 		try {
-			return await (
-				await request("json").get(url)
-			).data;
+			const response = await request(url !== "reports/report" ? "json" : "blob").get(url);
+			return response.data;
 		} catch (err: any) {
 			return null;
 		}

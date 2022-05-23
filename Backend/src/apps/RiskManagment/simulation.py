@@ -9,7 +9,7 @@ class Simulation:
         self,
         cities,
         adjacency_mat,
-        nPopulation=22,
+        nPopulation=5,
         nIter=20,
         selectivity=0.15,
         pCross=0.5,

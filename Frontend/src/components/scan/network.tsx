@@ -1,7 +1,8 @@
 /** @format */
 
 import { Body, Header, Table } from "../table/Table";
-
+import { Ports } from "./ports";
+import { OS } from "./os";
 export const Network = (props: { data: any; actions: any }) => (
 	<Table>
 		<Header>
@@ -15,6 +16,7 @@ export const Network = (props: { data: any; actions: any }) => (
 				<th rowSpan={2}>OS</th>
 				<th rowSpan={2}>Ports</th>
 				<th colSpan={3}>Estatus</th>
+				<th rowSpan={2}>Fecha y Hora</th>
 				<th rowSpan={2}>Estado</th>
 			</tr>
 			<tr>
@@ -31,17 +33,30 @@ export const Network = (props: { data: any; actions: any }) => (
 		<Body>
 			{props.data.map((item: any, index: number) => (
 				<tr key={`data for network ${index}`}>
-					<td>{item.address}</td>
-					<td>{item.hostname.length > 0 ? item.hostname[0].name : null}</td>
-					<td>{item.hostname.length > 0 ? item.hostname[0].type : null}</td>
-					<td>{item.macaddress?.addr || null}</td>
-					<td>{item.macaddress?.addrtype || null}</td>
-					<td>{item.macaddress?.vendor || null}</td>
-					<td>{/*item.osmatch || null*/}</td>
-					<td>{/*item.ports || null*/}</td>
-					<td>{item.state?.reason || null}</td>
-					<td>{item.state?.reason_ttl || null}</td>
-					<td>{item.state?.reason_state || null}</td>
+					<td className="text-wrap">{item.address}</td>
+					<td className="text-wrap">
+						{item.hostname.length > 0 ? item.hostname[0].name : null}
+					</td>
+					<td className="text-wrap">
+						{item.hostname.length > 0 ? item.hostname[0].type : null}
+					</td>
+					<td className="text-wrap">{null}</td>
+					<td className="text-wrap">{item.macaddress?.addrtype || null}</td>
+					<td className="text-wrap">{item.macaddress?.vendor || null}</td>
+					<td className="text-wrap">
+						<OS data={item.osmatch} id={index} name={item.address} />
+					</td>
+					<td>
+						{
+							item.ports.length > 0 ? (
+								<Ports data={item.ports} id={index} name={item.address} />
+							) : null /*item.ports || null*/
+						}
+					</td>
+					<td className="text-wrap">{item.state?.reason || null}</td>
+					<td className="text-wrap">{item.state?.reason_ttl || null}</td>
+					<td className="text-wrap">{item.state?.reason_state || null}</td>
+					<td className="text-wrap">{item.date}</td>
 					<td>
 						<div className="form-check form-switch">
 							<input

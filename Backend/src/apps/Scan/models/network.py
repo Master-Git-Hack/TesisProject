@@ -21,7 +21,7 @@ class Network(db.Model):
     ports = Column(JSON)
     state = Column(JSON)
     banned = Column(Boolean, default=False)
-    date = Column(DateTime, default=datetime.utcnow)
+    date = Column(DateTime, default=datetime.utcnow())
 
     def __init__(self, address, hostname, mac, os, ports, state, banned, date):
         self.address = address
@@ -35,3 +35,25 @@ class Network(db.Model):
 
     def __repr__(self):
         return f"<Network {self.address} banned:{self.banned}>"
+
+
+db.create_all()
+
+
+class NetworkSchema(ma.Schema):
+    class Meta:
+        fields = (
+            "id",
+            "address",
+            "hostname",
+            "mac",
+            "os",
+            "ports",
+            "state",
+            "banned",
+            "date",
+        )
+
+
+ntSchema = NetworkSchema()
+ntsSchema = NetworkSchema(many=True)
